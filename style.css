@@ -1,0 +1,299 @@
+/*
+  Main Index - Design System
+  Aesthetic: High-End Neumorphism / "Altezzoso & Vibe"
+  Palette: Soft Neutral (#e0e5ec) with Gold/Premium Accents
+*/
+
+:root {
+  --bg-color: #e0e5ec;
+  --light-shadow: #ffffff;
+  --dark-shadow: #babecc;
+  --accent-color: #7d9d85;
+  --premium-accent: #b8a06b; /* Gold touch for that "altezzoso" vibe */
+  --text-main: #4a5568;
+  --text-muted: #718096;
+  --serif-font: 'Crimson Pro', serif;
+  --sans-font: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2d3436;
+  --light-shadow: #3d4446;
+  --dark-shadow: #1e2325;
+  --accent-color: #a8c6a9;
+  --premium-accent: #d4b97d;
+  --text-main: #dfe6e9;
+  --text-muted: #b2bec3;
+}
+
+/* Pokéball Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+.pokeball {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 3px solid #333;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .pokeball {
+  background: #333;
+  border-color: #eee;
+}
+
+.pokeball::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #333;
+  border-bottom: 3px solid #fff;
+}
+
+[data-theme="dark"] .pokeball::before {
+  background: #eee;
+  border-color: #333;
+}
+
+.pokeball::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border: 3px solid #333;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+[data-theme="dark"] .pokeball::after {
+  background: #333;
+  border-color: #eee;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle-anim 1.5s infinite;
+}
+
+@keyframes sparkle-anim {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--sans-font);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Stacked Sheets Effect */
+.handbook-stack {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sheet {
+  background: var(--bg-color);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.sheet-bg-1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform: rotate(-1deg) translate(-5px, -5px);
+  box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
+}
+
+.sheet-bg-2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transform: rotate(1deg) translate(5px, 5px);
+  box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
+}
+
+.main-page {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 800px;
+  min-height: 600px;
+  padding: 60px 40px;
+  box-shadow: 20px 20px 60px var(--dark-shadow), -20px -20px 60px var(--light-shadow);
+  text-align: center;
+}
+
+/* Master Header - "Altezzoso" vibe */
+.master-header {
+  margin-bottom: 60px;
+}
+
+.crown-icon {
+  font-size: 2.5rem;
+  color: var(--premium-accent);
+  margin-bottom: 10px;
+  filter: drop-shadow(2px 2px 2px var(--dark-shadow));
+}
+
+.master-header h1 {
+  font-family: var(--serif-font);
+  font-size: 3rem;
+  color: var(--text-main);
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.header-line {
+  height: 4px;
+  width: 100px;
+  background: linear-gradient(90deg, transparent, var(--premium-accent), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Master Navigation */
+.master-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.nav-card {
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg-color);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 9px 9px 16px var(--dark-shadow), -9px -9px 16px var(--light-shadow);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 12px 12px 24px var(--dark-shadow), -12px -12px 24px var(--light-shadow);
+  color: var(--text-main);
+}
+
+.nav-card.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.nav-icon {
+  font-size: 2rem;
+  background: var(--bg-color);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
+  flex-shrink: 0;
+}
+
+.nav-info h3 {
+  font-family: var(--serif-font);
+  font-size: 1.3rem;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+
+.nav-info p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.nav-arrow {
+  margin-left: auto;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.nav-card:hover .nav-arrow {
+  transform: translateX(5px);
+  color: var(--premium-accent);
+}
+
+/* Footer */
+.handbook-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+  font-style: italic;
+}

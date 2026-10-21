@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IV & EV - Dispensa Didattica Pokémon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body onload="initTheme()">
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="pokeball"></div>
+    </div>
+
+    <div class="handbook-stack">
+      <!-- Background sheets for the "Stacked" effect -->
+      <div class="sheet sheet-bg-1"></div>
+      <div class="sheet sheet-bg-2"></div>
+
+      <!-- Main Interactive Page -->
+      <main class="sheet main-page">
+        <header class="handbook-header">
+          <h1>IV & EV</h1>
+          <p class="subtitle">Studio dei Punti Individuali e dello Sforzo</p>
+          <div class="header-line"></div>
+        </header>
+
+        <div class="handbook-content">
+          <!-- Left Column: Theory -->
+          <section class="guide-column">
+            <div class="neu-card guide-card">
+              <h3>I Punti Individuali</h3>
+              <div class="guide-content">
+                <p class="guide-text">
+                  I punti individuali, spesso indicati come <strong>IV (individual values)</strong>, sono uno degli elementi fondamentali nella determinazione del valore finale delle statistiche di un Pokémon.
+                </p>
+                <div class="guide-item">
+                  Ogni specie ha sempre le stesse statistiche base, pertanto gli IV hanno lo scopo di differenziare tra loro i diversi esemplari.
+                </div>
+                <div class="guide-item">
+                  In un certo senso potrebbero essere considerati gli equivalenti dei <strong>geni</strong> del Pokémon.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Right Column: Interactive Tool -->
+          <section class="tool-column">
+            <div class="starters-container">
+              <img src="starters/Bulbasaur.png" alt="Bulbasaur" class="starter-icon">
+              <img src="starters/Charmander.png" alt="Charmander" class="starter-icon">
+              <img src="starters/Squirtle.png" alt="Squirtle" class="starter-icon">
+            </div>
+            <div class="neu-card lookup-card">
+              <div class="section-header-tool">
+                <h3>Calcolo PS - Gen 1</h3>
+                <span class="badge">Kanto</span>
+              </div>
+              <p class="tool-description">Inserisci gli IV per calcolare i PS risultanti.</p>
+
+              <div class="input-grid-tool">
+                <div class="input-group">
+                  <label>Attacco</label>
+                  <div class="input-field">
+                    <input type="number" id="iv-atk" value="6" min="0" max="15">
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Difesa</label>
+                  <div class="input-field">
+                    <input type="number" id="iv-def" value="5" min="0" max="15">
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Velocità</label>
+                  <div class="input-field">
+                    <input type="number" id="iv-spd" value="6" min="0" max="15">
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Speciali</label>
+                  <div class="input-field">
+                    <input type="number" id="iv-spc" value="8" min="0" max="15">
+                  </div>
+                </div>
+              </div>
+
+              <div class="result-area-tool">
+                <span class="result-label">Valore PS Finale</span>
+                <div id="iv-hp-result" class="result-value">--</div>
+                <small id="binary-explanation" class="binary-detail"></small>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="handbook-footer">
+          <p>&copy; 2026 Laboratorio Glitchmon - Documentazione Educativa</p>
+        </footer>
+      </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

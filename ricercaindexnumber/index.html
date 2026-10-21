@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dispensa Didattica Pokémon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body onload="initTheme()">
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="pokeball"></div>
+    </div>
+
+    <div class="handbook-stack">
+      <!-- Background sheets for the "Stacked" effect -->
+      <div class="sheet sheet-bg-1"></div>
+      <div class="sheet sheet-bg-2"></div>
+
+      <!-- Main Interactive Page -->
+      <main class="sheet main-page">
+        <header class="handbook-header">
+          <h1>Dispensa Didattica Pokémon</h1>
+          <p class="subtitle">Manuale di studio: Prima Generazione (Kanto)</p>
+          <div class="header-line"></div>
+        </header>
+
+        <div class="handbook-content">
+          <!-- Left Column: Interactive Tool -->
+          <section class="tool-column">
+            <div class="neu-card lookup-card">
+              <label for="pokemon-index">Indice Numeral</label>
+              <div class="input-group">
+                <span class="prefix">#</span>
+                <input type="text" id="pokemon-index" placeholder="Esempio: 25" autocomplete="off">
+              </div>
+
+              <div class="result-display">
+                <img id="pokemon-img" src="" alt="Pokemon artwork" style="display:none;">
+                <h2 id="pokemon-name">Inserisci un numero...</h2>
+              </div>
+            </div>
+          </section>
+
+          <!-- Right Column: Didactic Guide -->
+          <section class="guide-column">
+            <div class="neu-card guide-card">
+              <h3>Guida allo Studio</h3>
+              <div id="pokemon-guide" class="guide-content">
+                <p class="guide-text">Attendo l'inserimento di un indice per generare l'analisi didattica del Pokémon.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="handbook-footer">
+          <p>&copy; 2026 Laboratorio Glitchmon - Documentazione Educativa</p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Archivio Centrale Glitchmon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body onload="initTheme()">
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="pokeball"></div>
+    </div>
+
+    <div class="handbook-stack">
+      <div class="sheet sheet-bg-1"></div>
+      <div class="sheet sheet-bg-2"></div>
+
+      <main class="sheet main-page">
+        <header class="master-header">
+          <div class="crown-icon">✧</div>
+          <h1>Archivio Centrale Glitchmon</h1>
+          <p class="subtitle">L'enciclopedia suprema della conoscenza Pokémon</p>
+          <div class="header-line"></div>
+        </header>
+
+        <nav class="master-nav">
+          <div class="nav-grid">
+            <a href="ricercaindexnumber/index.html" class="nav-card">
+              <div class="nav-icon">🔍</div>
+              <div class="nav-info">
+                <h3>Ricerca per Indice</h3>
+                <p>Accedi ai dati specifici tramite numero di catalogo.</p>
+              </div>
+              <span class="nav-arrow">→</span>
+            </a>
+
+            <a href="IV-EV/IVEV.html" class="nav-card">
+              <div class="nav-icon">🧬</div>
+              <div class="nav-info">
+                <h3>Genetica & Sforzo</h3>
+                <p>Studio approfondito di IV, EV e potenzialità intrinseche.</p>
+              </div>
+              <span class="nav-arrow">→</span>
+            </a>
+
+            <!-- Placeholder per futuri moduli -->
+            <div class="nav-card locked">
+              <div class="nav-icon">🔒</div>
+              <div class="nav-info">
+                <h3>Moduli Avanzati</h3>
+                <p>Contenuti in fase di catalogazione.</p>
+              </div>
+              <span class="nav-arrow">?</span>
+            </div>
+          </div>
+        </nav>
+
+        <footer class="handbook-footer">
+          <p>Sotto l'egida del Laboratorio Glitchmon &bull; 2026</p>
+        </footer>
+      </main>
+    </div>
+    <script src="theme.js"></script>
+  </body>
+</html>
