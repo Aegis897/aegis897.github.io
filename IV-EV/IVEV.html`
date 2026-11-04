@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IV & EV - Dispensa Didattica Pokémon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body onload="initTheme()">
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="pokeball"></div>
+    </div>
+
+    <div class="handbook-stack">
+      <!-- Background sheets for the "Stacked" effect -->
+      <div class="sheet sheet-bg-1"></div>
+      <div class="sheet sheet-bg-2"></div>
+
+      <!-- Main Interactive Page -->
+      <main class="sheet main-page">
+        <header class="handbook-header">
+          <h1>IV & EV</h1>
+          <p class="subtitle">Studio dei Punti Individuali e dello Sforzo</p>
+          <div class="header-line"></div>
+        </header>
+
+        <div class="handbook-content">
+          <!-- Gen 1 Section -->
+          <div class="gen-container">
+            <section class="guide-column">
+              <div class="neu-card guide-card">
+                <h3>I Punti Individuali (Gen 1)</h3>
+                <div class="guide-content">
+                  <p class="guide-text">
+                    I punti individuali, spesso indicati come <strong>IV (individual values)</strong>, sono uno degli elementi fondamentali nella determinazione del valore finale delle statistiche di un Pokémon.
+                  </p>
+                  <div class="guide-item">
+                    Ogni specie ha sempre le stesse statistiche base, pertanto gli IV hanno lo scopo di differenziare tra loro i diversi esemplari.
+                  </div>
+                  <div class="guide-item">
+                    In un certo senso potrebbero essere considerati gli equivalenti dei <strong>geni</strong> del Pokémon.
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-column">
+              <div class="starters-container">
+                <img src="starters/Bulbasaur.png" alt="Bulbasaur" class="starter-icon">
+                <img src="starters/Charmander.png" alt="Charmander" class="starter-icon">
+                <img src="starters/Squirtle.png" alt="Squirtle" class="starter-icon">
+              </div>
+              <div class="neu-card lookup-card">
+                <div class="section-header-tool">
+                  <h3>Calcolo PS - Gen 1</h3>
+                  <span class="badge">Kanto</span>
+                </div>
+                <p class="tool-description">Inserisci gli IV per calcolare i PS risultanti.</p>
+
+                <div class="input-grid-tool">
+                  <div class="input-group">
+                    <label>Attacco</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-atk" value="6" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Difesa</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-def" value="5" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Velocità</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-spd" value="6" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Speciali</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-spc" value="8" min="0" max="15">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="result-area-tool">
+                  <span class="result-label">Valore PS Finale</span>
+                  <div id="iv-hp-result" class="result-value">--</div>
+                  <small id="binary-explanation" class="binary-detail"></small>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Gen 2 Section -->
+          <div class="gen-container" style="margin-top: 80px; padding-top: 30px; border-top: 2px dashed var(--dark-shadow);">
+            <section class="guide-column">
+              <div class="neu-card guide-card">
+                <h3>Gen 2: Nuove Statistiche e Cromatici</h3>
+                <div class="guide-content">
+                  <p class="guide-text">
+                    A partire dalla seconda generazione, il sistema di calcolo delle statistiche subisce un'importante evoluzione.
+                  </p>
+                  <div class="guide-item">
+                    La statistica <strong>Speciali</strong> viene scissa in due valori distinti: <strong>Attacco Speciale</strong> e <strong>Difesa Speciale</strong>.
+                  </div>
+                  <div class="guide-item">
+                    Mentre il calcolo degli IV per i PS rimane invariato, gli <strong>EV (Effort Values)</strong> iniziano a essere accumulati singolarmente per ogni statistica.
+                  </div>
+                  <div class="guide-item">
+                    Viene introdotto il concetto di <strong>cromaticità</strong>: un esemplare è cromatico se possiede IV in Difesa, Velocità e Speciali pari a 10 e un IV in Attacco pari a 2, 3, 6, 7, 10, 11, 14 o 15.
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-column">
+              <div class="starters-container">
+                <img src="starters/Chikorita.png" alt="Chikorita" class="starter-icon">
+                <img src="starters/Cyndaquil.png" alt="Cyndaquil" class="starter-icon">
+                <img src="starters/Totodile.png" alt="Totodile" class="starter-icon">
+              </div>
+              <div class="neu-card lookup-card">
+                <div class="section-header-tool">
+                  <h3>Calcolo PS - Gen 2</h3>
+                  <span class="badge">Johto</span>
+                </div>
+                <p class="tool-description">Calcolo con Attacco Speciale e Difesa Speciale separati (ma sincronizzati).</p>
+
+                <div class="input-grid-tool">
+                  <div class="input-group">
+                    <label>Attacco</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-atk-v" value="6" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Difesa</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-def-v" value="5" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Velocità</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-spd-v" value="6" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Atk Speciale</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-spatk-v" value="8" min="0" max="15">
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <label>Def Speciale</label>
+                    <div class="input-field">
+                      <input type="number" id="iv-spdef-v" value="8" min="0" max="15">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="result-area-tool">
+                  <span class="result-label">Valore PS Finale (Variante)</span>
+                  <div id="iv-hp-result-v" class="result-value">--</div>
+                  <small id="binary-explanation-v" class="binary-detail"></small>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Gen 3 Section -->
+          <div class="gen-container" style="margin-top: 80px; padding-top: 30px; border-top: 2px dashed var(--dark-shadow);">
+            <section class="guide-column">
+              <div class="neu-card guide-card">
+                <h3>Gen 3: Rivoluzione degli IV</h3>
+                <div class="guide-content">
+                  <p class="guide-text">
+                    In terza generazione il sistema dei punti individuali è stato completamente rivisto, rendendo i Pokémon incompatibili con i titoli precedenti.
+                  </p>
+                  <div class="guide-item">
+                    Gli IV ora variano da <strong>0 a 31</strong> (5 bit per ogni statistica), aumentando drasticamente la variabilità tra esemplari.
+                  </div>
+                  <div class="guide-item">
+                    I <strong>Punti Salute (PS)</strong> hanno ora un proprio valore di IV indipendente, separato dagli altri parametri.
+                  </div>
+                  <div class="guide-item">
+                    Tutti i dati sono archiviati in un unico intero a <strong>32 bit</strong>, che include anche l'abilità e lo stato "uovo".
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-column">
+              <div class="starters-container">
+                <img src="starters/Treecko.png" alt="Treecko" class="starter-icon">
+                <img src="starters/Torchic.png" alt="Torchic" class="starter-icon">
+                <img src="starters/Mudkip.png" alt="Mudkip" class="starter-icon">
+              </div>
+              <div class="neu-card lookup-card">
+                <div class="section-header-tool">
+                  <h3>Distribuzione IV (32-bit)</h3>
+                  <span class="badge">Hoenn</span>
+                </div>
+                <p class="tool-description">Struttura del registro a 32 bit per ogni esemplare.</p>
+
+                <div class="iv-bit-distribution">
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 0</span>
+                    <span class="bit-value">Abilità</span>
+                    <div class="bit-box single"></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 1</span>
+                    <span class="bit-value">Uovo?</span>
+                    <div class="bit-box single"></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 2-6</span>
+                    <span class="bit-value">Difesa Speciale</span>
+                    <div class="bit-box group"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 7-11</span>
+                    <span class="bit-value">Attacco Speciale</span>
+                    <div class="bit-box group"><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 12-16</span>
+                    <span class="bit-value">Velocità</span>
+                    <div class="bit-box group"><span>1</span><span>1</span><span>0</span><span>1</span><span>0</span></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 17-21</span>
+                    <span class="bit-value">Difesa</span>
+                    <div class="bit-box group"><span>0</span><span>0</span><span>1</span><span>1</span><span>1</span></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 22-26</span>
+                    <span class="bit-value">Attacco</span>
+                    <div class="bit-box group"><span>1</span><span>0</span><span>1</span><span>0</span><span>0</span></div>
+                  </div>
+                  <div class="bit-row">
+                    <span class="bit-label">Bit 27-31</span>
+                    <span class="bit-value">PS</span>
+                    <div class="bit-box group"><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Gen 4+ Section (Modern IVs) -->
+          <div class="gen-container" style="margin-top: 80px; padding-top: 30px; border-top: 2px dashed var(--dark-shadow);">
+            <section class="guide-column">
+              <div class="neu-card guide-card">
+                <h3>Gen 4+: L'Era Moderna degli IV</h3>
+                <div class="guide-content">
+                  <p class="guide-text">
+                    A partire dalla quarta generazione, il sistema degli IV si è stabilizzato nel range 0-31, diventando il fulcro della personalizzazione competitiva.
+                  </p>
+                  <div class="guide-item">
+                    <strong class="accent">Ereditarietà:</strong> Con la Gen 4 arrivano gli oggetti per il breeding (come i <strong>Vigore</strong>), che permettono a un genitore di trasmettere un IV specifico alla prole. In Gen 6, l'oggetto <strong>Destincomune</strong> estende questa capacità a ben cinque statistiche.
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Determinazione:</strong> Per conoscere i valori IV sono stati introdotti i <strong>Caratteristiche</strong> (Gen 4+) e il <strong>Giudice Statistiche</strong>, che forniscono feedback testuali (es. "Al top" o "Sbalorditivo").
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Allenamento Pro (Hyper Training):</strong> Introdotto in Gen 7, permette di massimizzare virtualmente gli IV. Il valore reale non cambia, ma nel calcolo delle statistiche l'IV viene considerato pari a 31.
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Potenzialità Intrinseche:</strong> Gli IV rappresentano i "geni" del Pokémon; insieme a statistiche base, livello, natura ed EV, definiscono il tetto massimo di potenza raggiungibile.
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-column">
+              <!-- Trio 1: Gen 4 -->
+              <div class="modern-feature-block" style="margin-bottom: 30px;">
+                <div class="starters-container" style="justify-content: center;">
+                  <img src="starters/Turtwig.png" class="starter-icon">
+                  <img src="starters/Chimchar.png" class="starter-icon">
+                  <img src="starters/Piplup.png" class="starter-icon">
+                </div>
+                <div class="neu-card" style="padding: 15px; text-align: center; font-size: 0.9rem;">
+                  <strong class="accent">Ereditarietà</strong><br>
+                  Oggetti Vigore & Destincomune
+                </div>
+              </div>
+
+              <!-- Trio 2: Gen 5 -->
+              <div class="modern-feature-block" style="margin-bottom: 30px;">
+                <div class="starters-container" style="justify-content: center;">
+                  <img src="starters/Snivy.png" class="starter-icon">
+                  <img src="starters/Tepig.png" class="starter-icon">
+                  <img src="starters/Oshawott.png" class="starter-icon">
+                </div>
+                <div class="neu-card" style="padding: 15px; text-align: center; font-size: 0.9rem;">
+                  <strong class="accent">Determinazione</strong><br>
+                  Caratteristiche & Giudici IV
+                </div>
+              </div>
+
+              <!-- Trio 3: Gen 6/7+ -->
+              <div class="modern-feature-block">
+                <div class="starters-container" style="justify-content: center;">
+                  <img src="starters/Chespin.png" class="starter-icon">
+                  <img src="starters/Fennekin.png" class="starter-icon">
+                  <img src="starters/Froakie.png" class="starter-icon">
+                </div>
+                <div class="neu-card" style="padding: 15px; text-align: center; font-size: 0.9rem;">
+                  <strong class="accent">Ottimizzazione</strong><br>
+                  Allenamento Pro (Hyper Training)
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        </div>
+
+        <footer class="handbook-footer">
+          <p>&copy; 2026 Laboratorio Glitchmon - Documentazione Educativa</p>
+        </footer>
+      </main>
+    </div>
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,18 +1,20 @@
 /*
-  IV & EV Page - Design System
-  Inherited from Pokémon Didactic Handbook (Main Index)
-  Aesthetic: Natural & Calm Neumorphism
+  IV & EV - Design system
+  Estetica: neumorfismo naturale e calmo
+  Tipografia: Crimson Pro (titoli) + Inter (testo, esempi, etichette)
 */
 
+/* ---------- Variabili ---------- */
 :root {
   --bg-color: #e0e5ec;
   --light-shadow: #ffffff;
   --dark-shadow: #babecc;
   --accent-color: #7d9d85;
+  --accent-soft: rgba(125, 157, 133, 0.22);
   --text-main: #4a5568;
   --text-muted: #718096;
-  --serif-font: 'Crimson Pro', serif;
-  --sans-font: 'Inter', sans-serif;
+  --serif-font: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --sans-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -20,11 +22,12 @@
   --light-shadow: #3d4446;
   --dark-shadow: #1e2325;
   --accent-color: #a8c6a9;
+  --accent-soft: rgba(168, 198, 169, 0.2);
   --text-main: #dfe6e9;
   --text-muted: #b2bec3;
 }
 
-/* Pokéball Theme Toggle */
+/* ---------- Toggle tema (Pokéball) ---------- */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -48,7 +51,7 @@
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: background 0.3s ease;
 }
 
@@ -107,7 +110,7 @@
   50% { opacity: 1; transform: scale(1); }
 }
 
-
+/* ---------- Base ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -118,22 +121,48 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: var(--sans-font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 90px 20px 20px;
   overflow-x: hidden;
-
 }
 
-/* Stacked Sheets Effect - Exact copy from index */
+/* Regola tipografica unica: i titoli sono sempre serif, il testo sempre sans */
+h1, h2, h3, h4 {
+  font-family: var(--serif-font);
+  color: var(--text-main);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p, li, label, small, input, button {
+  font-family: var(--sans-font);
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.accent {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ---------- Pagina a fogli sovrapposti ---------- */
 .handbook-stack {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 900px;
 }
 
 .sheet {
@@ -142,53 +171,51 @@ body {
   transition: all 0.3s ease;
 }
 
-.sheet-bg-1 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transform: rotate(-2deg) translate(-10px, -10px);
-  box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
-}
-
+.sheet-bg-1,
 .sheet-bg-2 {
   position: absolute;
   width: 100%;
   height: 100%;
+  box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
+}
+
+.sheet-bg-1 {
+  z-index: 1;
+  transform: rotate(-2deg) translate(-10px, -10px);
+}
+
+.sheet-bg-2 {
   z-index: 2;
   transform: rotate(2deg) translate(10px, 10px);
-  box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
 }
 
 .main-page {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 900px;
   min-height: 600px;
-  padding: 40px;
+  padding: 48px;
   box-shadow: 20px 20px 60px var(--dark-shadow), -20px -20px 60px var(--light-shadow);
   display: flex;
   flex-direction: column;
 }
 
-/* Header - Exact copy from index */
+/* ---------- Intestazione ---------- */
 .handbook-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .handbook-header h1 {
-  font-family: var(--serif-font);
-  font-size: 2.5rem;
-  color: var(--text-main);
-  margin-bottom: 10px;
+  font-size: 2.75rem;
+  margin-bottom: 8px;
 }
 
 .subtitle {
   font-weight: 300;
   color: var(--text-muted);
   font-style: italic;
+  font-size: 1.05rem;
   margin-bottom: 20px;
 }
 
@@ -200,36 +227,43 @@ body {
   border-radius: 2px;
 }
 
-/* Layout Content */
+/* ---------- Struttura a sezioni ---------- */
 .handbook-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   margin-bottom: 40px;
 }
 
-@media (max-width: 768px) {
-  .handbook-content {
-    grid-template-columns: 1fr;
-  }
+.gen-block + .gen-block {
+  margin-top: 70px;
+  padding-top: 50px;
+  border-top: 2px dashed var(--dark-shadow);
 }
 
-/* Neumorphic Cards - Exact copy from index */
+.gen-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ---------- Card neumorfiche ---------- */
 .neu-card {
   background: var(--bg-color);
   border-radius: 25px;
-  padding: 30px;
+  padding: 32px;
   box-shadow: 9px 9px 16px var(--dark-shadow), -9px -9px 16px var(--light-shadow);
-  height: 100%;
 }
 
-/* Guide Section */
-.guide-card h3 {
-  font-family: var(--serif-font);
+.guide-card h3,
+.lookup-card .section-header-tool h3 {
+  font-size: 1.6rem;
+}
+
+.guide-card .guide-text {
   margin-bottom: 20px;
-  color: var(--text-main);
-  border-bottom: 1px solid var(--dark-shadow);
-  padding-bottom: 10px;
+  line-height: 1.65;
 }
 
 .guide-content {
@@ -238,78 +272,81 @@ body {
   gap: 15px;
 }
 
-.guide-text {
-  color: var(--text-muted);
-  font-style: italic;
-  line-height: 1.6;
-}
-
 .guide-item {
-  padding: 12px 15px;
+  padding: 14px 16px;
   background: var(--bg-color);
-  border-radius: 12px;
-  box-shadow: 4px 4px 8px var(--dark-shadow), -4px -4px 8px var(--light-shadow);
+  border-radius: 14px;
+  box-shadow: 6px 6px 12px var(--dark-shadow), -6px -6px 12px var(--light-shadow);
   font-size: 0.95rem;
   color: var(--text-main);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* Tool Section Adaptation */
+/* ---------- Icone starter ---------- */
 .starters-container {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
   margin-bottom: -20px;
-  margin-left: -10px;
-  z-index: 4;
+  margin-left: -6px;
   position: relative;
+  z-index: 4;
+}
+
+.starters-container.centered {
+  justify-content: center;
+  margin: 0 0 6px;
 }
 
 .starter-icon {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   filter: drop-shadow(3px 3px 5px var(--dark-shadow));
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .starter-icon:hover {
   transform: scale(1.1) translateY(-5px);
 }
 
+/* ---------- Intestazione della card strumento ---------- */
 .section-header-tool {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.section-header-tool h3 {
-  font-family: var(--serif-font);
-  color: var(--text-main);
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .badge {
   background: var(--bg-color);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 10px;
   font-size: 0.75rem;
   font-weight: 600;
+  letter-spacing: 0.03em;
   color: var(--text-muted);
   box-shadow: inset 2px 2px 5px var(--dark-shadow), inset -2px -2px 5px var(--light-shadow);
+  white-space: nowrap;
 }
 
 .tool-description {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-style: italic;
+  line-height: 1.5;
 }
 
+/* ---------- Input ---------- */
 .input-grid-tool {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: 16px;
+  margin-bottom: 26px;
 }
 
 .input-group {
@@ -319,19 +356,25 @@ body {
 }
 
 .input-group label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .input-field {
   background: var(--bg-color);
   border-radius: 12px;
-  padding: 5px 10px;
+  padding: 4px 10px;
   box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
   display: flex;
   align-items: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.input-field:focus-within {
+  box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow), 0 0 0 2px var(--accent-soft);
 }
 
 .input-field input {
@@ -341,14 +384,24 @@ body {
   padding: 8px 0;
   font-family: var(--sans-font);
   font-size: 1rem;
+  font-weight: 500;
   color: var(--text-main);
   width: 100%;
   text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
+.input-field input::-webkit-outer-spin-button,
+.input-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ---------- Risultato ---------- */
 .result-area-tool {
   text-align: center;
-  padding: 20px;
+  padding: 22px 20px;
   border-radius: 20px;
   background: var(--bg-color);
   box-shadow: 9px 9px 16px var(--dark-shadow), -9px -9px 16px var(--light-shadow);
@@ -356,32 +409,228 @@ body {
 
 .result-label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .result-value {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--accent-color);
   font-family: var(--serif-font);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.1;
 }
 
 .binary-detail {
   display: block;
   margin-top: 10px;
-  font-family: monospace;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   color: var(--text-muted);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
 
-/* Footer - Exact copy from index */
+/* ---------- Gen 3: distribuzione bit ---------- */
+.iv-bit-distribution {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-color);
+  border-radius: 16px;
+  box-shadow: inset 2px 2px 5px var(--dark-shadow), inset -2px -2px 5px var(--light-shadow);
+}
+
+.bit-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bit-label {
+  flex-shrink: 0;
+  min-width: 72px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.72rem;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+.bit-value {
+  flex: 1;
+  min-width: 0;
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.bit-num {
+  min-width: 28px;
+  text-align: right;
+  font-family: var(--serif-font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Contenitore dei singoli bit: vanno a capo senza uscire dalla card */
+.bit-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Singolo bit: blocchetto neomorfico */
+.bit {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-color);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px var(--dark-shadow), -4px -4px 8px var(--light-shadow);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.bit:hover {
+  transform: translateY(-2px);
+}
+
+.bit:active {
+  transform: translateY(0);
+  box-shadow: inset 2px 2px 4px var(--dark-shadow), inset -2px -2px 4px var(--light-shadow);
+}
+
+.bit.on {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.bit:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* ---------- Gen 4: griglia funzionalità ---------- */
+.guide-card.wide {
+  height: auto;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ---------- Footer ---------- */
 .handbook-footer {
   text-align: center;
   font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: auto;
+  margin-top: 48px;
   padding-top: 20px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  body {
+    padding: 80px 14px 16px;
+  }
+
+  .main-page {
+    padding: 28px 22px;
+  }
+
+  .handbook-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .gen-container,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gen-container {
+    gap: 40px;
+  }
+
+  .neu-card {
+    padding: 24px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  .input-grid-tool {
+    gap: 12px;
+  }
+
+  .starter-icon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .bit {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- Allineamento colonna teoria con colonna esempi ---------- */
+.guide-card h3,
+.lookup-card h3 {
+  font-family: var(--serif-font);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+.guide-card .guide-text,
+.guide-card .guide-item,
+.lookup-card .tool-description,
+.lookup-card .input-group label,
+.lookup-card .result-label {
+  font-family: var(--sans-font);
+  color: var(--text-main);
+}
+
+.guide-card .guide-text,
+.guide-card .guide-item {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.guide-card strong,
+.guide-card .guide-item strong {
+  font-family: var(--sans-font);
+  font-weight: 600;
 }

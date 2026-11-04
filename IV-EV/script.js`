@@ -1,0 +1,134 @@
+/**
+ * Calcolatore IV per Glitchmon
+ * Gestisce la logica di calcolo delle statistiche in base alla generazione.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Riferimenti agli elementi DOM Card 1
+    const inputs = {
+        atk: document.getElementById('iv-atk'),
+        def: document.getElementById('iv-def'),
+        spd: document.getElementById('iv-spd'),
+        spc: document.getElementById('iv-spc')
+    };
+
+    const resultDisplay = document.getElementById('iv-hp-result');
+    const binaryExplanation = document.getElementById('binary-explanation');
+
+    // Riferimenti agli elementi DOM Card 2 (Variante)
+    const inputsV = {
+        atk: document.getElementById('iv-atk-v'),
+        def: document.getElementById('iv-def-v'),
+        spd: document.getElementById('iv-spd-v'),
+        spatk: document.getElementById('iv-spatk-v'),
+        spdef: document.getElementById('iv-spdef-v')
+    };
+
+    const resultDisplayV = document.getElementById('iv-hp-result-v');
+    const binaryExplanationV = document.getElementById('binary-explanation-v');
+
+    /**
+     * Calcola gli IV dei PS per la Prima Generazione.
+     */
+    function calculateGen1HP() {
+        const vals = {
+            atk: parseInt(inputs.atk.value) || 0,
+            def: parseInt(inputs.def.value) || 0,
+            spd: parseInt(inputs.spd.value) || 0,
+            spc: parseInt(inputs.spc.value) || 0
+        };
+
+        for (let key in vals) {
+            if (vals[key] < 0) inputs[key].value = 0;
+            if (vals[key] > 15) inputs[key].value = 15;
+        }
+
+        const bitAtk = vals.atk & 1;
+        const bitDef = vals.def & 1;
+        const bitSpd = vals.spd & 1;
+        const bitSpc = vals.spc & 1;
+
+        const hpIV = (bitAtk << 3) | (bitDef << 2) | (bitSpd << 1) | bitSpc;
+        const binaryString = `${bitAtk}${bitDef}${bitSpd}${bitSpc}`;
+
+        resultDisplay.textContent = hpIV;
+        binaryExplanation.textContent = `Binario: ${binaryString} (Atk ${bitAtk}, Def ${bitDef}, Spd ${bitSpd}, Spc ${bitSpc})`;
+    }
+
+    /**
+     * Calcola gli IV dei PS per la Variante con Speciali separati.
+     */
+    function calculateGen1HPVariante() {
+        const vals = {
+            atk: parseInt(inputsV.atk.value) || 0,
+            def: parseInt(inputsV.def.value) || 0,
+            spd: parseInt(inputsV.spd.value) || 0,
+            spatk: parseInt(inputsV.spatk.value) || 0,
+            spdef: parseInt(inputsV.spdef.value) || 0
+        };
+
+        for (let key in vals) {
+            if (vals[key] < 0) inputsV[key].value = 0;
+            if (vals[key] > 15) inputsV[key].value = 15;
+        }
+
+        // Usiamo SpAtk come riferimento per il calcolo dei PS (seguendo la logica richiesta)
+        const bitAtk = vals.atk & 1;
+        const bitDef = vals.def & 1;
+        const bitSpd = vals.spd & 1;
+        const bitSpc = vals.spatk & 1;
+
+        const hpIV = (bitAtk << 3) | (bitDef << 2) | (bitSpd << 1) | bitSpc;
+        const binaryString = `${bitAtk}${bitDef}${bitSpd}${bitSpc}`;
+
+        resultDisplayV.textContent = hpIV;
+        binaryExplanationV.textContent = `Binario: ${binaryString} (Atk ${bitAtk}, Def ${bitDef}, Spd ${bitSpd}, Spc ${bitSpc})`;
+    }
+
+    // Event listener Card 1
+    Object.values(inputs).forEach(input => {
+        input.addEventListener('input', calculateGen1HP);
+    });
+
+    // Event listener Card 2
+    Object.values(inputsV).forEach(input => {
+        input.addEventListener('input', (e) => {
+            // Sincronizzazione: se modifico SpAtk, aggiorna SpDef
+            if (e.target.id === 'iv-spatk-v') {
+                inputsV.spdef.value = e.target.value;
+            }
+            calculateGen1HPVariante();
+        });
+    });
+
+    // Esecuzione iniziale
+    calculateGen1HP();
+    calculateGen1HPVariante();
+    initGen3Interactivity();
+});
+
+/**
+ * Gestisce l'interattività della distribuzione IV di Gen 3.
+ */
+function initGen3Interactivity() {
+    const bit0Box = document.getElementById('bit-0-box');
+    const bit1Box = document.getElementById('bit-1-box');
+
+    if (!bit0Box || !bit1Box) return;
+
+    const toggleBit = (box) => {
+        box.classList.toggle('active');
+    };
+
+    bit0Box.addEventListener('click', () => toggleBit(bit0Box));
+    bit1Box.addEventListener('click', () => toggleBit(bit1Box));
+
+    // Handle group bit toggles
+    document.querySelectorAll('.bit-box.group span').forEach(span => {
+        span.addEventListener('click', () => {
+            const currentVal = span.textContent;
+            span.textContent = currentVal === '0' ? '1' : '0';
+            span.classList.toggle('active');
+        });
+    });
+}

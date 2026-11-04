@@ -197,6 +197,7 @@ inputField.addEventListener('input', () => {
     let imageName = name;
     if (name === "Nidoran♂") imageName = "nidoranmaschio";
     if (name === "Nidoran♀") imageName = "nidoranfemmina";
+    if (name === "Mr. Mime") imageName = "Mr-mime";
     const imgUrl = `../spritess/${imageName}.png`;
     resultImg.src = imgUrl;
     resultImg.style.display = 'block';

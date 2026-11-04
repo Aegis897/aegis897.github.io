@@ -4,22 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IV & EV - Dispensa Didattica Pokémon</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body onload="initTheme()">
-    <div class="theme-toggle" onclick="toggleTheme()">
+    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Cambia tema" tabindex="0">
       <div class="pokeball"></div>
     </div>
 
     <div class="handbook-stack">
-      <!-- Background sheets for the "Stacked" effect -->
-      <div class="sheet sheet-bg-1"></div>
-      <div class="sheet sheet-bg-2"></div>
+      <!-- Fogli di sfondo per l'effetto a pila -->
+      <div class="sheet sheet-bg-1" aria-hidden="true"></div>
+      <div class="sheet sheet-bg-2" aria-hidden="true"></div>
 
-      <!-- Main Interactive Page -->
       <main class="sheet main-page">
         <header class="handbook-header">
           <h1>IV & EV</h1>
@@ -28,72 +27,433 @@
         </header>
 
         <div class="handbook-content">
-          <!-- Left Column: Theory -->
-          <section class="guide-column">
-            <div class="neu-card guide-card">
-              <h3>I Punti Individuali</h3>
-              <div class="guide-content">
-                <p class="guide-text">
-                  I punti individuali, spesso indicati come <strong>IV (individual values)</strong>, sono uno degli elementi fondamentali nella determinazione del valore finale delle statistiche di un Pokémon.
-                </p>
-                <div class="guide-item">
-                  Ogni specie ha sempre le stesse statistiche base, pertanto gli IV hanno lo scopo di differenziare tra loro i diversi esemplari.
+
+          <!-- ===== Gen 1 ===== -->
+          <section class="gen-block">
+            <div class="gen-container">
+              <section class="guide-column">
+                <div class="neu-card guide-card">
+                  <h3>I Punti Individuali (Gen 1)</h3>
+                  <div class="guide-content">
+                    <p class="guide-text">
+                      I punti individuali, spesso indicati come <strong>IV (individual values)</strong>, sono uno degli elementi fondamentali nella determinazione del valore finale delle statistiche di un Pokémon.
+                    </p>
+                    <div class="guide-item">
+                      Ogni specie ha sempre le stesse statistiche base, pertanto gli IV hanno lo scopo di differenziare tra loro i diversi esemplari.
+                    </div>
+                    <div class="guide-item">
+                      In un certo senso potrebbero essere considerati gli equivalenti dei <strong>geni</strong> del Pokémon.
+                    </div>
+                  </div>
                 </div>
-                <div class="guide-item">
-                  In un certo senso potrebbero essere considerati gli equivalenti dei <strong>geni</strong> del Pokémon.
+              </section>
+
+              <section class="tool-column">
+                <div class="starters-container">
+                  <img src="starters/Bulbasaur.png" alt="Bulbasaur" class="starter-icon">
+                  <img src="starters/Charmander.png" alt="Charmander" class="starter-icon">
+                  <img src="starters/Squirtle.png" alt="Squirtle" class="starter-icon">
                 </div>
+                <div class="neu-card lookup-card">
+                  <div class="section-header-tool">
+                    <h3>Calcolo PS - Gen 1</h3>
+                    <span class="badge">Kanto</span>
+                  </div>
+                  <p class="tool-description">Inserisci gli IV per calcolare i PS risultanti.</p>
+
+                  <div class="input-grid-tool">
+                    <div class="input-group">
+                      <label for="iv-atk">Attacco</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-atk" value="6" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-def">Difesa</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-def" value="5" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-spd">Velocità</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-spd" value="6" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-spc">Speciali</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-spc" value="8" min="0" max="15">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="result-area-tool">
+                    <span class="result-label">Valore PS Finale</span>
+                    <div id="iv-hp-result" class="result-value">--</div>
+                    <small id="binary-explanation" class="binary-detail"></small>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- ===== Gen 2 ===== -->
+          <section class="gen-block">
+            <div class="gen-container">
+              <section class="guide-column">
+                <div class="neu-card guide-card">
+                  <h3>Gen 2: Nuove Statistiche e Cromatici</h3>
+                  <div class="guide-content">
+                    <p class="guide-text">
+                      A partire dalla seconda generazione, il sistema di calcolo delle statistiche subisce un'importante evoluzione.
+                    </p>
+                    <div class="guide-item">
+                      La statistica <strong>Speciali</strong> viene scissa in due valori distinti: <strong>Attacco Speciale</strong> e <strong>Difesa Speciale</strong>.
+                    </div>
+                    <div class="guide-item">
+                      Mentre il calcolo degli IV per i PS rimane invariato, gli <strong>EV (Effort Values)</strong> iniziano a essere accumulati singolarmente per ogni statistica.
+                    </div>
+                    <div class="guide-item">
+                      Viene introdotto il concetto di <strong>cromaticità</strong>: un esemplare è cromatico se possiede IV in Difesa, Velocità e Speciali pari a 10 e un IV in Attacco pari a 2, 3, 6, 7, 10, 11, 14 o 15.
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="tool-column">
+                <div class="starters-container">
+                  <img src="starters/Chikorita.png" alt="Chikorita" class="starter-icon">
+                  <img src="starters/Cyndaquil.png" alt="Cyndaquil" class="starter-icon">
+                  <img src="starters/Totodile.png" alt="Totodile" class="starter-icon">
+                </div>
+                <div class="neu-card lookup-card">
+                  <div class="section-header-tool">
+                    <h3>Calcolo PS - Gen 2</h3>
+                    <span class="badge">Johto</span>
+                  </div>
+                  <p class="tool-description">Calcolo con Attacco Speciale e Difesa Speciale separati (ma sincronizzati).</p>
+
+                  <div class="input-grid-tool">
+                    <div class="input-group">
+                      <label for="iv-atk-v">Attacco</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-atk-v" value="6" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-def-v">Difesa</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-def-v" value="5" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-spd-v">Velocità</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-spd-v" value="6" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-spatk-v">Atk Speciale</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-spatk-v" value="8" min="0" max="15">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="iv-spdef-v">Def Speciale</label>
+                      <div class="input-field">
+                        <input type="number" id="iv-spdef-v" value="8" min="0" max="15">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="result-area-tool">
+                    <span class="result-label">Valore PS Finale (Variante)</span>
+                    <div id="iv-hp-result-v" class="result-value">--</div>
+                    <small id="binary-explanation-v" class="binary-detail"></small>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- ===== Gen 3 ===== -->
+          <section class="gen-block">
+            <div class="gen-container">
+              <section class="guide-column">
+                <div class="neu-card guide-card">
+                  <h3>Gen 3: Rivoluzione degli IV</h3>
+                  <div class="guide-content">
+                    <p class="guide-text">
+                      In terza generazione il sistema dei punti individuali è stato completamente rivisto, rendendo i Pokémon incompatibili con i titoli precedenti.
+                    </p>
+                    <div class="guide-item">
+                      Gli IV ora variano da <strong>0 a 31</strong> (5 bit per ogni statistica), aumentando drasticamente la variabilità tra esemplari.
+                    </div>
+                    <div class="guide-item">
+                      I <strong>Punti Salute (PS)</strong> hanno ora un proprio valore di IV indipendente, separato dagli altri parametri.
+                    </div>
+                    <div class="guide-item">
+                      Tutti i dati sono archiviati in un unico intero a <strong>32 bit</strong>, che include anche l'abilità e lo stato "uovo".
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="tool-column">
+                <div class="starters-container">
+                  <img src="starters/Treecko.png" alt="Treecko" class="starter-icon">
+                  <img src="starters/Torchic.png" alt="Torchic" class="starter-icon">
+                  <img src="starters/Mudkip.png" alt="Mudkip" class="starter-icon">
+                </div>
+                <div class="neu-card lookup-card">
+                  <div class="section-header-tool">
+                    <h3>Distribuzione IV (32-bit)</h3>
+                    <span class="badge">Hoenn</span>
+                  </div>
+                  <p class="tool-description">Clicca sui bit per vedere l'effetto sul registro.</p>
+
+                  <div class="iv-bit-distribution">
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 0</span>
+                        <span class="bit-value">Abilità</span>
+                      </div>
+                      <div class="bit-box" data-single data-shift="0">
+                        <button type="button" class="bit" aria-pressed="false" aria-label="Bit 0, abilità">0</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 1</span>
+                        <span class="bit-value">Uovo?</span>
+                      </div>
+                      <div class="bit-box" data-single data-shift="1">
+                        <button type="button" class="bit" aria-pressed="false" aria-label="Bit 1, uovo">0</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 2-6</span>
+                        <span class="bit-value">Difesa Speciale</span>
+                        <span class="bit-num" data-num-for="spdef">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="spdef" data-shift="2">
+                        <button type="button" class="bit" aria-label="Bit 2-6, bit 1">1</button>
+                        <button type="button" class="bit" aria-label="Bit 2-6, bit 2">0</button>
+                        <button type="button" class="bit" aria-label="Bit 2-6, bit 3">1</button>
+                        <button type="button" class="bit" aria-label="Bit 2-6, bit 4">1</button>
+                        <button type="button" class="bit" aria-label="Bit 2-6, bit 5">1</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 7-11</span>
+                        <span class="bit-value">Attacco Speciale</span>
+                        <span class="bit-num" data-num-for="spatk">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="spatk" data-shift="7">
+                        <button type="button" class="bit" aria-label="Bit 7-11, bit 1">0</button>
+                        <button type="button" class="bit" aria-label="Bit 7-11, bit 2">1</button>
+                        <button type="button" class="bit" aria-label="Bit 7-11, bit 3">0</button>
+                        <button type="button" class="bit" aria-label="Bit 7-11, bit 4">0</button>
+                        <button type="button" class="bit" aria-label="Bit 7-11, bit 5">1</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 12-16</span>
+                        <span class="bit-value">Velocità</span>
+                        <span class="bit-num" data-num-for="spd">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="spd" data-shift="12">
+                        <button type="button" class="bit" aria-label="Bit 12-16, bit 1">1</button>
+                        <button type="button" class="bit" aria-label="Bit 12-16, bit 2">1</button>
+                        <button type="button" class="bit" aria-label="Bit 12-16, bit 3">0</button>
+                        <button type="button" class="bit" aria-label="Bit 12-16, bit 4">1</button>
+                        <button type="button" class="bit" aria-label="Bit 12-16, bit 5">0</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 17-21</span>
+                        <span class="bit-value">Difesa</span>
+                        <span class="bit-num" data-num-for="def">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="def" data-shift="17">
+                        <button type="button" class="bit" aria-label="Bit 17-21, bit 1">0</button>
+                        <button type="button" class="bit" aria-label="Bit 17-21, bit 2">0</button>
+                        <button type="button" class="bit" aria-label="Bit 17-21, bit 3">1</button>
+                        <button type="button" class="bit" aria-label="Bit 17-21, bit 4">1</button>
+                        <button type="button" class="bit" aria-label="Bit 17-21, bit 5">1</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 22-26</span>
+                        <span class="bit-value">Attacco</span>
+                        <span class="bit-num" data-num-for="atk">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="atk" data-shift="22">
+                        <button type="button" class="bit" aria-label="Bit 22-26, bit 1">1</button>
+                        <button type="button" class="bit" aria-label="Bit 22-26, bit 2">0</button>
+                        <button type="button" class="bit" aria-label="Bit 22-26, bit 3">1</button>
+                        <button type="button" class="bit" aria-label="Bit 22-26, bit 4">0</button>
+                        <button type="button" class="bit" aria-label="Bit 22-26, bit 5">0</button>
+                      </div>
+                    </div>
+                    <div class="bit-row">
+                      <div class="bit-head">
+                        <span class="bit-label">Bit 27-31</span>
+                        <span class="bit-value">PS</span>
+                        <span class="bit-num" data-num-for="hp">--</span>
+                      </div>
+                      <div class="bit-box" data-stat="hp" data-shift="27">
+                        <button type="button" class="bit" aria-label="Bit 27-31, bit 1">0</button>
+                        <button type="button" class="bit" aria-label="Bit 27-31, bit 2">1</button>
+                        <button type="button" class="bit" aria-label="Bit 27-31, bit 3">1</button>
+                        <button type="button" class="bit" aria-label="Bit 27-31, bit 4">0</button>
+                        <button type="button" class="bit" aria-label="Bit 27-31, bit 5">1</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="result-area-tool" style="margin-top: 24px;">
+                    <span class="result-label">Registro 32-bit</span>
+                    <div id="reg-hex" class="result-value">0x00000000</div>
+                    <small id="reg-dec" class="binary-detail">0</small>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- ===== Gen 4+ ===== -->
+          <section class="gen-block">
+            <div class="neu-card guide-card wide">
+              <h3>Gen 4+: L'Era Moderna degli IV</h3>
+              <p class="guide-text">
+                A partire dalla quarta generazione, il sistema degli IV si è stabilizzato nel range 0-31, diventando il fulcro della personalizzazione competitiva.
+              </p>
+
+              <div class="feature-grid">
+                <article class="feature-card">
+                  <div class="starters-container centered">
+                    <img src="starters/Turtwig.png" alt="Turtwig" class="starter-icon">
+                    <img src="starters/Chimchar.png" alt="Chimchar" class="starter-icon">
+                    <img src="starters/Piplup.png" alt="Piplup" class="starter-icon">
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Ereditarietà:</strong> Con la Gen 4 arrivano gli oggetti per il breeding (come i <strong>Vigore</strong>), che permettono a un genitore di trasmettere un IV specifico alla prole. In Gen 6, l'oggetto <strong>Destincomune</strong> estende questa capacità a ben cinque statistiche.
+                  </div>
+                </article>
+
+                <article class="feature-card">
+                  <div class="starters-container centered">
+                    <img src="starters/Snivy.png" alt="Snivy" class="starter-icon">
+                    <img src="starters/Tepig.png" alt="Tepig" class="starter-icon">
+                    <img src="starters/Oshawott.png" alt="Oshawott" class="starter-icon">
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Determinazione:</strong> Per conoscere i valori IV sono stati introdotti le <strong>Caratteristiche</strong> (Gen 4+) e il <strong>Giudice Statistiche</strong>, che forniscono feedback testuali (es. "Al top" o "Sbalorditivo").
+                  </div>
+                </article>
+
+                <article class="feature-card">
+                  <div class="starters-container centered">
+                    <img src="starters/Chespin.png" alt="Chespin" class="starter-icon">
+                    <img src="starters/Fennekin.png" alt="Fennekin" class="starter-icon">
+                    <img src="starters/Froakie.png" alt="Froakie" class="starter-icon">
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Allenamento Pro (Hyper Training):</strong> Introdotto in Gen 7, permette di massimizzare virtualmente gli IV. Il valore reale non cambia, ma nel calcolo delle statistiche l'IV viene considerato pari a 31.
+                  </div>
+                </article>
+
+                <article class="feature-card">
+                  <div class="starters-container centered">
+                    <img src="starters/Rowlet.png" alt="Rowlet" class="starter-icon">
+                    <img src="starters/Litten.png" alt="Litten" class="starter-icon">
+                    <img src="starters/Popplio.png" alt="Popplio" class="starter-icon">
+                  </div>
+                  <div class="guide-item">
+                    <strong class="accent">Potenzialità Intrinseche:</strong> Gli IV rappresentano i "geni" del Pokémon; insieme a statistiche base, livello, natura ed EV, definiscono il tetto massimo di potenza raggiungibile.
+                  </div>
+                </article>
               </div>
             </div>
           </section>
 
-          <!-- Right Column: Interactive Tool -->
-          <section class="tool-column">
-            <div class="starters-container">
-              <img src="starters/Bulbasaur.png" alt="Bulbasaur" class="starter-icon">
-              <img src="starters/Charmander.png" alt="Charmander" class="starter-icon">
-              <img src="starters/Squirtle.png" alt="Squirtle" class="starter-icon">
-            </div>
-            <div class="neu-card lookup-card">
-              <div class="section-header-tool">
-                <h3>Calcolo PS - Gen 1</h3>
-                <span class="badge">Kanto</span>
-              </div>
-              <p class="tool-description">Inserisci gli IV per calcolare i PS risultanti.</p>
+          <!-- ===== Sezione EV ===== -->
+          <section class="gen-block">
+            <div class="gen-container">
+              <section class="guide-column">
+                <div class="neu-card guide-card">
+                  <h3>I Punti Sforzo (EV)</h3>
+                  <div class="guide-content">
+                    <p class="guide-text">
+                      Gli <strong>EV (Effort Values)</strong> rappresentano l'allenamento di un Pokémon. A differenza degli IV, che sono innati, gli EV vengono accumulati attraverso i combattimenti o l'uso di oggetti specifici.
+                    </p>
 
-              <div class="input-grid-tool">
-                <div class="input-group">
-                  <label>Attacco</label>
-                  <div class="input-field">
-                    <input type="number" id="iv-atk" value="6" min="0" max="15">
-                  </div>
-                </div>
-                <div class="input-group">
-                  <label>Difesa</label>
-                  <div class="input-field">
-                    <input type="number" id="iv-def" value="5" min="0" max="15">
-                  </div>
-                </div>
-                <div class="input-group">
-                  <label>Velocità</label>
-                  <div class="input-field">
-                    <input type="number" id="iv-spd" value="6" min="0" max="15">
-                  </div>
-                </div>
-                <div class="input-group">
-                  <label>Speciali</label>
-                  <div class="input-field">
-                    <input type="number" id="iv-spc" value="8" min="0" max="15">
-                  </div>
-                </div>
-              </div>
+                    <div class="guide-item">
+                      <strong class="accent">Gen 1-2:</strong> Gli EV sono accumulati fino a un massimo di 255 per statistica. Ogni 4 punti EV aumentano di 1 il valore della statistica.
+                      
+                    </div>
 
-              <div class="result-area-tool">
-                <span class="result-label">Valore PS Finale</span>
-                <div id="iv-hp-result" class="result-value">--</div>
-                <small id="binary-explanation" class="binary-detail"></small>
-              </div>
+                    <div class="guide-item">
+                      <strong class="accent">Gen 3+:</strong> Viene introdotto un limite globale di 510 EV, con un massimo di 252 per singola statistica. Il calcolo rimane basato sulla divisione per 4.
+                     
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="tool-column">
+                <div class="starters-container">
+                  <img src="starters/Grookey.png" alt="Grookey" class="starter-icon">
+                  <img src="starters/Scorbunny.png" alt="Scorbunny" class="starter-icon">
+                  <img src="starters/Sobble.png" alt="Sobble" class="starter-icon">
+                </div>
+                <div class="neu-card lookup-card">
+                  <div class="section-header-tool">
+                    <h3>Focus Allenamento</h3>
+                    <span class="badge">Training</span>
+                  </div>
+                  <p class="tool-description">Gli EV trasformano il potenziale in potenza reale.</p>
+
+                  <div class="guide-content" style="margin-top: 20px;">
+                    <div class="guide-item">
+                      <strong class="accent">Gen 1-2</strong>
+                      <br><small>Limite: 255 per stat</small>
+                      <code style="display: block; font-family: monospace; background: var(--accent-soft); padding: 4px; border-radius: 4px; margin-top: 4px; font-size: 0.8rem; text-align: center;">
+                        Bonus = EV / 4
+                      </code>
+                    </div>
+                    <div class="guide-item">
+                      <strong class="accent">Gen 3+</strong>
+                      <br><small>Limite: 510 Tot / 252 per stat</small>
+                      <code style="display: block; font-family: monospace; background: var(--accent-soft); padding: 4px; border-radius: 4px; margin-top: 4px; font-size: 0.8rem; text-align: center;">
+                        Bonus = EV / 4
+                      </code>
+                    </div>
+                    <div class="guide-item">
+                      <strong class="accent">Formula Finale (Gen 3+)</strong>
+                      <br><small>Statistiche standard</small>
+                      <code style="display: block; font-family: monospace; background: var(--accent-soft); padding: 8px; border-radius: 8px; margin-top: 4px; font-size: 0.75rem; text-align: center;">
+                        Stat = [ { (2*Base + IV + EV/4) * Liv/100 } + 5 ] * Nat
+                      </code>
+                      <br><small>Punti Salute (PS)</small>
+                      <code style="display: block; font-family: monospace; background: var(--accent-soft); padding: 8px; border-radius: 8px; margin-top: 4px; font-size: 0.75rem; text-align: center;">
+                        PS = [ { (2*Base + IV + EV/4) * Liv/100 } + Base/2 + 10 ]
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           </section>
+
         </div>
 
         <footer class="handbook-footer">
@@ -101,6 +461,7 @@
         </footer>
       </main>
     </div>
+
     <script src="../theme.js"></script>
     <script src="script.js"></script>
   </body>
